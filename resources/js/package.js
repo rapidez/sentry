@@ -1,15 +1,50 @@
-// This file will be loaded automatically after installing the package.
-// See: https://github.com/rapidez/rapidez/blob/master/resources/js/app.js
+import * as Sentry from '@sentry/vue'
 
-// Vue.component('example', () => import('./components/Example.vue'))
-// -- Or if you don't want it to be lazy loaded:
-// import example from './components/Example.vue'
-// Vue.component('example', example)
+// Collect all configured integrations
+let integrations = Object.entries(window.config.sentry.integrations).map(([integration, value]) => {
+    if (!value) {
+        return
+    }
 
-document.addEventListener('turbo:load', function () {
-    // You can access the main Vue instance with "window.app"
+    let integrationFunction = Sentry[integration + 'Integration']
+    if(!integrationFunction) {
+        return
+    }
 
-    // window.app.$on('event-name', () => {
-    //
-    // });
+    return value === true ? integrationFunction() : integrationFunction(value)
+}).filter((value) => value !== undefined)
+
+// Set up the Sentry configuration
+let configuration = Object.assign(
+    {
+        Vue,
+        dsn: import.meta.env.VITE_SENTRY_DSN,
+        environment: import.meta.env.MODE,
+        integrations: integrations,
+    },
+    window.config.sentry.configuration
+)
+
+// Initialize Sentry
+Sentry.init(configuration)
+
+// Functionality to link a user to the Sentry messages
+let setUser = (user) => {
+    if(window.app.loggedIn) {
+        Sentry.setUser({
+            id: user.id,
+            username: [user.firstname, user.lastname].filter(Boolean).join(' '),
+            email: user.email,
+        })
+    } else {
+        Sentry.setUser(null)
+    }
+
+    // Add an extra 'logged_in' tag to errors
+    Sentry.setTag('logged_in', window.app.loggedIn)
+}
+
+document.addEventListener('turbo:load', async () => {
+    window.app.$on(['logged-in', 'logout'], () => setUser(window.app.user))
+    setUser(window.app.user)
 })
