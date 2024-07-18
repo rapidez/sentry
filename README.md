@@ -15,6 +15,12 @@ VITE_SENTRY_DSN=[your sentry DSN url here]
 
 Setting your Sentry DSN to be public like this is [safe](https://docs.sentry.io/concepts/key-terms/dsn-explainer/).
 
+You can also disable this package in your .env by adding:
+
+```
+SENTRY_ENABLED=false
+```
+
 ## Configuration
 
 You can publish the config with:

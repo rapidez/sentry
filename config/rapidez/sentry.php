@@ -3,7 +3,7 @@
 return [
     // Configuration as defined in the docs: https://docs.sentry.io/platforms/javascript/guides/vue/configuration/
     'configuration' => [
-        'enabled' => true,
+        'enabled' => env('SENTRY_ENABLED', true),
 
         // Amount of errors to be logged to sentry (1.00 = 100%)
         'sampleRate' => 1.00,
