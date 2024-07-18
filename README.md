@@ -1,5 +1,5 @@
 # Rapidez Sentry
-This package integrates Sentry Vue into a rapidez project.
+This package integrates Sentry Vue into a Rapidez project.
 
 ## Installation
 
