@@ -28,6 +28,12 @@ You can publish the config with:
 php artisan vendor:publish --tag=rapidez-sentry-config
 ```
 
+Some basic configuration settings can also be set in your env, for example:
+```
+SENTRY_SAMPLE_RATE=50
+SENTRY_INTEGRATION_REPLAY=true
+```
+
 ## License
 
 GNU General Public License v3. Please see [License File](LICENSE) for more information.

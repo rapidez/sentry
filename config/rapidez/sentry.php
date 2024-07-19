@@ -6,7 +6,7 @@ return [
         'enabled' => env('SENTRY_ENABLED', true),
 
         // Amount of errors to be logged to sentry (1.00 = 100%)
-        'sampleRate' => 1.00,
+        'sampleRate' => env('SENTRY_SAMPLE_RATE', 100) / 100,
     ],
 
     // For integrations, see: https://docs.sentry.io/platforms/javascript/guides/vue/configuration/integrations/
@@ -16,18 +16,18 @@ return [
     //      'blockAllMedia' => true,
     //  ],
     'integrations' => [
-        'browserProfiling' => false,
-        'browserTracing' => false,
-        'captureConsole' => false,
-        'contextLines' => false,
-        'debug' => false,
-        'extraErrorData' => false,
-        'httpClient' => false,
-        'moduleMetadata' => false,
-        'rewriteFrames' => false,
-        'replay' => false,
-        'replayCanvas' => false,
-        'reportingObserver' => false,
-        'sessionTiming' => false,
+        'browserProfiling' => env('SENTRY_INTEGRATION_BROWSER_PROFILING', false),
+        'browserTracing' => env('SENTRY_INTEGRATION_BROWSER_TRACING', false),
+        'captureConsole' => env('SENTRY_INTEGRATION_CAPTURE_CONSOLE', false),
+        'contextLines' => env('SENTRY_INTEGRATION_CONTEXT_LINES', false),
+        'debug' => env('SENTRY_INTEGRATION_DEBUG', false),
+        'extraErrorData' => env('SENTRY_INTEGRATION_EXTRA_ERROR_DATA', false),
+        'httpClient' => env('SENTRY_INTEGRATION_HTTP_CLIENT', false),
+        'moduleMetadata' => env('SENTRY_INTEGRATION_MODULE_METADATA', false),
+        'rewriteFrames' => env('SENTRY_INTEGRATION_REWRITE_FRAMES', false),
+        'replay' => env('SENTRY_INTEGRATION_REPLAY', false),
+        'replayCanvas' => env('SENTRY_INTEGRATION_REPLAY_CANVAS', false),
+        'reportingObserver' => env('SENTRY_INTEGRATION_REPORTING_OBSERVER', false),
+        'sessionTiming' => env('SENTRY_INTEGRATION_SESSION_TIMING', false),
     ],
 ];
