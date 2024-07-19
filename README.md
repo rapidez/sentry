@@ -4,6 +4,7 @@ This package integrates Sentry Vue into a Rapidez project.
 ## Installation
 
 ```
+yarn add @sentry/vue --dev
 composer require rapidez/sentry
 ```
 
