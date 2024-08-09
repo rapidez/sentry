@@ -9,8 +9,8 @@ class ConfigComposer
 {
     public function compose(View $view)
     {
-        Config::set('frontend.sentry.configuration', config('rapidez.sentry.configuration'));
-        Config::set('frontend.sentry.enabled', config('rapidez.sentry.configuration.enabled'));
-        Config::set('frontend.sentry.integrations', config('rapidez.sentry.integrations'));
+        Config::set('frontend.sentry.configuration', config('rapidez.sentry-vue.configuration'));
+        Config::set('frontend.sentry.enabled', config('rapidez.sentry-vue.configuration.enabled'));
+        Config::set('frontend.sentry.integrations', config('rapidez.sentry-vue.integrations'));
     }
 }
