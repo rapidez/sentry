@@ -1,5 +1,5 @@
 # Rapidez Sentry
-This package integrates Sentry into a Rapidez project. This package requires the `sentry/sentry-laravel` package.
+This package integrates Sentry Laravel and Sentry Vue into a Rapidez project.
 
 ## Installation
 
