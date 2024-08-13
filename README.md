@@ -11,8 +11,8 @@ composer require rapidez/sentry
 You will need to add the following lines to your .env:
 
 ```
-SENTRY_DSN=[your sentry DSN url here]
-VITE_SENTRY_DSN="${SENTRY_DSN}"
+SENTRY_LARAVEL_DSN=___PUBLIC_DSN___
+VITE_SENTRY_DSN="${SENTRY_LARAVEL_DSN}"
 ```
 
 You don't need the `VITE_SENTRY_DSN` line if you don't want to use the Sentry Vue package. Note that setting your Sentry DSN to be public like this is [safe](https://docs.sentry.io/concepts/key-terms/dsn-explainer/).
