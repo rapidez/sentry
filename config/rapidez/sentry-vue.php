@@ -10,7 +10,6 @@ return [
         'sampleRate' => env('SENTRY_VUE_SAMPLE_RATE', 100) / 100,
     ],
 
-
     // For integrations, see: https://docs.sentry.io/platforms/javascript/guides/vue/configuration/integrations/
     // If you want to add extra configuration to the constructor of an integration, change the `true` to an array like so:
     //  'replay' => [
