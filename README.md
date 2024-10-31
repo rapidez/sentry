@@ -38,6 +38,20 @@ SENTRY_VUE_INTEGRATION_REPLAY=true
 
 Check out the [sentry/sentry-laravel readme](https://github.com/getsentry/sentry-laravel) for configuration of the laravel package.
 
+## Testing
+
+Errors thrown directly from the browser console don't get caught by Sentry, so you can test whether or not the frontend error reporting works by sending a test error in the browser console with:
+
+```js
+document.dispatchEvent(new Event('sentry-test-error'))
+```
+
+This functionality can be disabled in your `.env`:
+
+```
+SENTRY_VUE_ALLOW_TEST_ERRORS=false
+```
+
 ## License
 
 GNU General Public License v3. Please see [License File](LICENSE) for more information.

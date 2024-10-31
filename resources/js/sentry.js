@@ -48,3 +48,10 @@ document.addEventListener('turbo:load', async () => {
     window.app.$on(['logged-in', 'logout'], () => setUser(window.app.user))
     setUser(window.app.user)
 })
+
+// Allow test errors to be sent from the browser console with `document.dispatchEvent(new Event('sentry-test-error'))`
+if(window.config.sentry.configuration.allow_test_errors) {
+    document.addEventListener('sentry-test-error', () => {
+        throw new Error('Sentry test error')
+    })
+}
