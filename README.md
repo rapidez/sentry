@@ -46,7 +46,7 @@ Errors thrown directly from the browser console don't get caught by Sentry, so y
 document.dispatchEvent(new Event('sentry-test-error'))
 ```
 
-This functionality can be disabled in your .env:
+This functionality can be disabled in your `.env`:
 
 ```
 SENTRY_VUE_ALLOW_TEST_ERRORS=false
