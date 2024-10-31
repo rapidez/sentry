@@ -40,7 +40,7 @@ Check out the [sentry/sentry-laravel readme](https://github.com/getsentry/sentry
 
 ## Testing
 
-Errors thrown directly from the browser console don't get caught by sentry, so you can test whether or not the frontend error reporting works by sending a test error in the browser console with:
+Errors thrown directly from the browser console don't get caught by Sentry, so you can test whether or not the frontend error reporting works by sending a test error in the browser console with:
 
 ```js
 document.dispatchEvent(new Event('sentry-test-error'))
