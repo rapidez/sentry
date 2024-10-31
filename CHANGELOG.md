@@ -1,6 +1,12 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/2.0.0...2.0.0)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/2.1.0...2.1.0)
+## [2.1.0](https://github.com/rapidez/sentry/releases/tag/2.1.0) - 2024-10-31
+
+### Added
+
+- Test errors from the browser console (#6)
+
 ## [2.0.0](https://github.com/rapidez/sentry/releases/tag/2.0.0) - 2024-08-13
 
 ### Added
