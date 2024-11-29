@@ -44,7 +44,7 @@ let setUser = (user) => {
     Sentry.setTag('logged_in', window.app.loggedIn)
 }
 
-document.addEventListener('turbo:load', async () => {
+document.addEventListener('vue:loaded', async () => {
     window.app.$on(['logged-in', 'logout'], () => setUser(window.app.user))
     setUser(window.app.user)
 })
