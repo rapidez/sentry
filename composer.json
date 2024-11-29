@@ -18,7 +18,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.1|^8.2|^8.3",
-        "rapidez/core": "^1.0|^2.0",
+        "rapidez/core": "^2.8",
         "sentry/sentry-laravel": "^4.7"
     },
     "autoload": {
