@@ -1,6 +1,12 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/2.1.0...2.1.0)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/2.1.1...2.1.1)
+## [2.1.1](https://github.com/rapidez/sentry/releases/tag/2.1.1) - 2024-11-29
+
+### Fixed
+
+- Listen to vue:loaded (#7)
+
 ## [2.1.0](https://github.com/rapidez/sentry/releases/tag/2.1.0) - 2024-10-31
 
 ### Added
