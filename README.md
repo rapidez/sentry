@@ -52,6 +52,19 @@ This functionality can be disabled in your `.env`:
 SENTRY_VUE_ALLOW_TEST_ERRORS=false
 ```
 
+## Deprecating older browsers
+
+You may end up having a lot of errors caused by people using really old browsers that don't support some more modern widely supported functions. To combat this, you can use the `deprecations` section in the configuration file:
+
+```php
+'deprecations' => [
+    'String.prototype.replaceAll',
+    'Array.prototype.at',
+]
+```
+
+Before initializing Sentry, this package will first check whether any of the given variables/functions are nullish (null or undefined). These are checked with `window` as the base variable.
+
 ## License
 
 GNU General Public License v3. Please see [License File](LICENSE) for more information.
