@@ -9,12 +9,17 @@ return [
         // Amount of errors to be logged to sentry (1.00 = 100%)
         'sampleRate' => env('SENTRY_VUE_SAMPLE_RATE', 100) / 100,
 
+        // See the Sentry documentation: https://docs.sentry.io/platforms/javascript/guides/vue/configuration/filtering/#using-ignore-errors
+        'ignoreErrors' => [
+            // 'AbortError',
+        ],
+
         // If any of the following variables/functions are nullish (null or undefined), do not enable Sentry.
         // This helps avoid errors that are only caused by extremely old browsers.
         'deprecations' => [
             // replaceAll has been implemented on all browsers since late 2020. Uncomment to use.
             // 'String.prototype.replaceAll',
-        ]
+        ],
     ],
 
     // For integrations, see: https://docs.sentry.io/platforms/javascript/guides/vue/configuration/integrations/

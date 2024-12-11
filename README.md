@@ -65,6 +65,19 @@ You may end up having a lot of errors caused by people using really old browsers
 
 Before initializing Sentry, this package will first check whether any of the given variables/functions are nullish (null or undefined). These are checked with `window` as the base variable.
 
+## Filtering errors
+
+You can use the standard Sentry configuration for `ignoreErrors` as described in the [sentry documentation](https://docs.sentry.io/platforms/javascript/guides/vue/configuration/filtering/#using-ignore-errors).
+
+This can be done in the configuration file like so:
+
+```php
+'ignoreErrors' => [
+    'AbortError',
+    '_isDestroyed',
+],
+```
+
 ## License
 
 GNU General Public License v3. Please see [License File](LICENSE) for more information.
