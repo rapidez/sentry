@@ -63,7 +63,8 @@ You may end up having a lot of errors caused by people using really old browsers
 ]
 ```
 
-Before initializing Sentry, this package will first check whether any of the given variables/functions are nullish (null or undefined). These are checked with `window` as the base variable.
+Before initializing Sentry, this package will first check whether any of the given variables/functions are nullish (null or undefined). These are checked with `window` as the base variable.  
+If *any* of them end up being nullish, Sentry will not be loaded and frontend errors will not be logged.
 
 ## Filtering errors
 
