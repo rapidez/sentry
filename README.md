@@ -57,6 +57,8 @@ addBeforeSendMethodHandler((event) => {
 
 Note that event handlers will be run in the order that they have been added, as changes made within these handlers need to be carried over.
 
+To drop the event completely, you can return `null`. Note that this means you need to always return the event if you don't want it to be dropped.
+
 ## Testing
 
 Errors thrown directly from the browser console don't get caught by Sentry, so you can test whether or not the frontend error reporting works by sending a test error in the browser console with:

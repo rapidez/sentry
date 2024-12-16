@@ -5,5 +5,5 @@ export async function addBeforeSendMethodHandler(promise) {
 }
 
 export async function runBeforeSendMethodHandlers(event) {
-    return beforeSendMethodHandlers.reduce((event, handler) => handler(event) || event, event)
+    return beforeSendMethodHandlers.reduce((event, handler) => handler(event), event)
 }
