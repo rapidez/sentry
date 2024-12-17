@@ -1,6 +1,14 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/2.1.1...2.1.1)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/3.0.0...3.0.0)
+## [3.0.0](https://github.com/rapidez/sentry/releases/tag/3.0.0) - 2024-12-17
+
+### Added
+
+- Rapidez v3 support (19b0c0a)
+- Make beforeSend hookable (#9)
+- Add browser deprecations (#8)
+
 ## [2.1.1](https://github.com/rapidez/sentry/releases/tag/2.1.1) - 2024-11-29
 
 ### Fixed
