@@ -73,6 +73,33 @@ This functionality can be disabled in your `.env`:
 SENTRY_VUE_ALLOW_TEST_ERRORS=false
 ```
 
+## Deprecating older browsers
+
+You may end up having a lot of errors caused by people using really old browsers that don't support some more modern widely supported functions. To combat this, you can use the `deprecations` section in the configuration file:
+
+```php
+'deprecations' => [
+    'String.prototype.replaceAll',
+    'Array.prototype.at',
+]
+```
+
+Before initializing Sentry, this package will first check whether any of the given variables/functions are nullish (null or undefined). These are checked with `window` as the base variable.  
+If *any* of them end up being nullish, Sentry will not be loaded and frontend errors will not be logged.
+
+## Filtering errors
+
+You can use the standard Sentry configuration for `ignoreErrors` as described in the [sentry documentation](https://docs.sentry.io/platforms/javascript/guides/vue/configuration/filtering/#using-ignore-errors).
+
+This can be done in the configuration file like so:
+
+```php
+'ignoreErrors' => [
+    'AbortError',
+    '_isDestroyed',
+],
+```
+
 ## License
 
 GNU General Public License v3. Please see [License File](LICENSE) for more information.
