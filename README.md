@@ -38,6 +38,27 @@ SENTRY_VUE_INTEGRATION_REPLAY=true
 
 Check out the [sentry/sentry-laravel readme](https://github.com/getsentry/sentry-laravel) for configuration of the laravel package.
 
+### Hooking into the beforeSend method
+
+This package provides a way to hook into [the beforeSend method](https://docs.sentry.io/platforms/javascript/guides/vue/configuration/filtering/#using-before-send) by using the `useBeforeSendHandlers` store. This can be used in the following way:
+
+```js
+import { addBeforeSendMethodHandler } from 'Vendor/rapidez/sentry/resources/js/stores/useBeforeSendHandlers'
+
+[...]
+
+addBeforeSendMethodHandler((event) => {
+    if (event.user) {
+        delete event.user.email
+    }
+    return event
+})
+```
+
+Note that event handlers will be run in the order that they have been added, as changes made within these handlers need to be carried over.
+
+To drop the event completely, you can return `null`. Note that this means you need to always return the event if you don't want it to be dropped.
+
 ## Testing
 
 Errors thrown directly from the browser console don't get caught by Sentry, so you can test whether or not the frontend error reporting works by sending a test error in the browser console with:
