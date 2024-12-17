@@ -1,9 +1,9 @@
 let beforeSendMethodHandlers = []
 
-export async function addBeforeSendMethodHandler(promise) {
-    beforeSendMethodHandlers.push(promise)
+export function addBeforeSendMethodHandler(handler) {
+    beforeSendMethodHandlers.push(handler)
 }
 
-export async function runBeforeSendMethodHandlers(event) {
+export function runBeforeSendMethodHandlers(event) {
     return beforeSendMethodHandlers.reduce((event, handler) => handler(event), event)
 }
