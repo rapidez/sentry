@@ -22,6 +22,12 @@ return [
         ],
     ],
 
+    'filters' => [
+        // This filters out any errors that come from scripts not hosted from the current host.
+        // For example, you don't want to see any errors coming from user extensions.
+        'filterExternalUrls' => true
+    ],
+
     // For integrations, see: https://docs.sentry.io/platforms/javascript/guides/vue/configuration/integrations/
     // If you want to add extra configuration to the constructor of an integration, change the `true` to an array like so:
     //  'replay' => [

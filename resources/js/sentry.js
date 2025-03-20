@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/vue'
 import { runBeforeSendMethodHandlers } from './stores/useBeforeSendHandlers'
+import './filters.js'
 
 // Collect all configured integrations
 let integrations = Object.entries(window.config.sentry.integrations).map(([integration, value]) => {
@@ -22,9 +23,7 @@ let configuration = Object.assign(
         dsn: import.meta.env.VITE_SENTRY_DSN,
         environment: import.meta.env.MODE,
         integrations: integrations,
-        beforeSend(event) {
-            return runBeforeSendMethodHandlers(event)
-        }
+        beforeSend: runBeforeSendMethodHandlers,
     },
     window.config.sentry.configuration
 )
