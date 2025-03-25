@@ -1,6 +1,12 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/3.0.0...3.0.0)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/3.1.0...3.1.0)
+## [3.1.0](https://github.com/rapidez/sentry/releases/tag/3.1.0) - 2025-03-25
+
+### Added
+
+- Add filter for scripts that give an error outside the current host (#10)
+
 ## [3.0.0](https://github.com/rapidez/sentry/releases/tag/3.0.0) - 2024-12-17
 
 ### Added
