@@ -5,5 +5,5 @@ export function addBeforeSendMethodHandler(handler) {
 }
 
 export function runBeforeSendMethodHandlers(event) {
-    return beforeSendMethodHandlers.reduce((event, handler) => handler(event), event)
+    return beforeSendMethodHandlers.reduce((event, handler) => event === null ? null : handler(event), event)
 }
