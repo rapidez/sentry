@@ -1,6 +1,12 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/3.1.0...3.1.0)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/4.0.0...4.0.0)
+## [4.0.0](https://github.com/rapidez/sentry/releases/tag/4.0.0) - 2025-06-05
+
+### Added
+
+- Rapidez v4 support (08e97f7)
+
 ## [3.1.0](https://github.com/rapidez/sentry/releases/tag/3.1.0) - 2025-03-25
 
 ### Added
