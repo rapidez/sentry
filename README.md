@@ -117,7 +117,7 @@ SENTRY_VUE_INTEGRATION_GRAPHQL_CLIENT=true
 SENTRY_VUE_INTEGRATION_REPLAY=true
 ```
 
-With this enabled you must make sure the `sentry-trace,baggage,traceparent` headers are allowed in you Magento's (and if applicable Rapidez') CORS config
+With this enabled you must make sure the `sentry-trace,baggage,traceparent` headers are allowed in your Magento (and if applicable Rapidez) CORS config
 
 Then in Magento make sure to enable "Tracing", "Performance tracking", and to set a "Traces sample rate" (0 is allowed)
 
