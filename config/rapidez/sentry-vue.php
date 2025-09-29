@@ -8,6 +8,18 @@ return [
 
         // Amount of errors to be logged to sentry (1.00 = 100%)
         'sampleRate' => env('SENTRY_VUE_SAMPLE_RATE', 100) / 100,
+        // Amount of transactions to be logged to sentry (1.00 = 100%)
+        'tracesSampleRate' => env('SENTRY_VUE_TRACES_SAMPLE_RATE', 10) / 100,
+        // Which backends should sentry link transactions to, by default it'll be the Rapidez and Magento backend
+        'tracePropagationTargets' => explode(' ', env('SENTRY_VUE_TRACES_PROPAGATION_TARGETS', '') ),
+        // Amount of replays to be logged to sentry when no error occurs (1.00 = 100%)
+        // https://docs.sentry.io/platforms/javascript/guides/vue/session-replay/#recommended-production-sample-rates
+        'replaysSessionSampleRate' => env('SENTRY_VUE_REPLAY_SAMPLE_RATE', 10) / 100,
+        // Amount of replays to be logged to sentry when errors have occured (1.00 = 100%)
+        'replaysOnErrorSampleRate' =>  env('SENTRY_VUE_ERROR_REPLAY_SAMPLE_RATE', 100) / 100,
+
+        // Only report errors for matching urls, by default the shop url will be used
+        'allowUrls' => explode(' ', env('SENTRY_VUE_ALLOW_URLS', '') ),
 
         // See the Sentry documentation: https://docs.sentry.io/platforms/javascript/guides/vue/configuration/filtering/#using-ignore-errors
         'ignoreErrors' => [
@@ -42,6 +54,7 @@ return [
         'debug' => env('SENTRY_VUE_INTEGRATION_DEBUG', false),
         'extraErrorData' => env('SENTRY_VUE_INTEGRATION_EXTRA_ERROR_DATA', false),
         'httpClient' => env('SENTRY_VUE_INTEGRATION_HTTP_CLIENT', false),
+        'graphqlClient' => env('SENTRY_VUE_INTEGRATION_GRAPHQL_CLIENT', false),
         'moduleMetadata' => env('SENTRY_VUE_INTEGRATION_MODULE_METADATA', false),
         'rewriteFrames' => env('SENTRY_VUE_INTEGRATION_REWRITE_FRAMES', false),
         'replay' => env('SENTRY_VUE_INTEGRATION_REPLAY', false),

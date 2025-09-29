@@ -100,6 +100,29 @@ This can be done in the configuration file like so:
 ],
 ```
 
+## Linking frontend errors to Magento Errors (Distributed Tracing)
+
+For full observability you may want to connect your frontend errors and sessions to the thrown Magento errors.
+This could give benefits like showing where in a Replay an error occurred in Magento.
+
+For this you must first install the [Magento2 Sentry module](https://github.com/justbetter/magento2-sentry)
+
+Then add the following to your Rapidez `.env`
+
+```env
+SENTRY_VUE_SAMPLE_RATE=10 # A percentage is required here (0 is allowed as well)
+SENTRY_VUE_INTEGRATION_BROWSER_TRACING=true
+SENTRY_VUE_INTEGRATION_HTTP_CLIENT=true
+SENTRY_VUE_INTEGRATION_GRAPHQL_CLIENT=true
+SENTRY_VUE_INTEGRATION_REPLAY=true
+```
+
+With this enabled you must make sure the `sentry-trace,baggage,traceparent` headers are allowed in you Magento's (and if applicable Rapidez') CORS config
+
+Then in Magento make sure to enable "Tracing", "Performance tracking", and to set a "Traces sample rate" (0 is allowed)
+
+With this set up your Rapidez and Magento Sentry should be linked with each other.
+
 ## License
 
 GNU General Public License v3. Please see [License File](LICENSE) for more information.
