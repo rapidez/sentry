@@ -48,7 +48,7 @@ let setUser = (user) => {
 }
 
 document.addEventListener('vue:loaded', async () => {
-    window.app.$on(['logged-in', 'logout'], () => setUser(window.app.user))
+    window.app.$on(['logged-in', 'logged-out'], () => setUser(window.app.user))
     setUser(window.app.user)
 })
 
