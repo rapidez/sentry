@@ -1,6 +1,16 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/4.0.1...4.0.1)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/4.1.0...4.1.0)
+## [4.1.0](https://github.com/rapidez/sentry/releases/tag/4.1.0) - 2025-09-30
+
+### Added
+
+- Distributed tracing functionality with Magento (#12)
+
+### Fixed
+
+- Use correct event (#13)
+
 ## [4.0.1](https://github.com/rapidez/sentry/releases/tag/4.0.1) - 2025-06-10
 
 ### Fixed
