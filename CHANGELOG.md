@@ -1,6 +1,12 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/3.1.0...3.1.0)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/3.2.0...3.2.0)
+## [3.2.0](https://github.com/rapidez/sentry/releases/tag/3.2.0) - 2025-10-10
+
+### Added
+
+- Distributed tracing functionality with Magento (#15)
+
 ## [3.1.0](https://github.com/rapidez/sentry/releases/tag/3.1.0) - 2025-03-25
 
 ### Added
