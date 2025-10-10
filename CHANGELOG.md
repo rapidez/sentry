@@ -1,6 +1,12 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/4.1.0...4.1.0)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/4.1.1...4.1.1)
+## [4.1.1](https://github.com/rapidez/sentry/releases/tag/4.1.1) - 2025-10-10
+
+### Fixed
+
+- Ignore the expired token error (#14)
+
 ## [4.1.0](https://github.com/rapidez/sentry/releases/tag/4.1.0) - 2025-09-30
 
 ### Added
