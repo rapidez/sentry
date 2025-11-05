@@ -16,9 +16,9 @@ let integrations = Object.entries(window.config.sentry.integrations).map(([integ
     return value === true ? integrationFunction() : integrationFunction(value)
 }).filter((value) => value !== undefined)
 
-window.config.sentry.configuration.allowUrls.push(window.app.config.base_url)
-window.config.sentry.configuration.tracePropagationTargets.push(window.app.config.base_url)
-window.config.sentry.configuration.tracePropagationTargets.push(window.app.config.magento_url)
+window.config.sentry.configuration.allowUrls.push(window.config.base_url)
+window.config.sentry.configuration.tracePropagationTargets.push(window.config.base_url)
+window.config.sentry.configuration.tracePropagationTargets.push(window.config.magento_url)
 
 window.config.sentry.configuration.allowUrls = window.config.sentry.configuration.allowUrls.filter((a) => a)
 window.config.sentry.configuration.tracePropagationTargets = window.config.sentry.configuration.tracePropagationTargets.filter((a) => a)
@@ -55,7 +55,7 @@ let setUser = (user) => {
 }
 
 document.addEventListener('vue:loaded', async () => {
-    window.app.$on(['logged-in', 'logout'], () => setUser(window.app.user))
+    window.app.$on(['logged-in', 'logged-out'], () => setUser(window.app.user))
     setUser(window.app.user)
 })
 
