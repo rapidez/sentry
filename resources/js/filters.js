@@ -7,7 +7,13 @@ if (window.config.sentry.filters.filterExternalUrls) {
             if (!error?.stacktrace?.frames?.[0]?.filename) {
                 return true
             }
-            return (new URL(error.stacktrace.frames[0].filename)).hostname == window.location.hostname
+
+            try {
+                return (new URL(error.stacktrace.frames[0].filename)).hostname == window.location.hostname
+            } catch (e) {
+                // Return true for invalid filenames (e.g. '<anonymous>')
+                return true
+            }
         })
 
         if (event.exception.values.length == 0) {
