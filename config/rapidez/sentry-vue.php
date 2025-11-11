@@ -23,7 +23,7 @@ return [
 
         // See the Sentry documentation: https://docs.sentry.io/platforms/javascript/guides/vue/configuration/filtering/#using-ignore-errors
         'ignoreErrors' => [
-            // 'AbortError',
+            'Composite reader could not read a token',
         ],
 
         // If any of the following variables/functions are nullish (null or undefined), do not enable Sentry.
