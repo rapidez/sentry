@@ -1,6 +1,13 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/4.1.1...4.1.1)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/4.1.2...4.1.2)
+## [4.1.2](https://github.com/rapidez/sentry/releases/tag/4.1.2) - 2025-11-11
+
+### Fixed
+
+- Load urls from global config instead of vue config (#17)
+- Catch invalid url filenames (#22)
+
 ## [4.1.1](https://github.com/rapidez/sentry/releases/tag/4.1.1) - 2025-10-10
 
 ### Fixed
