@@ -1,6 +1,12 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/3.2.0...3.2.0)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/...3.2.1)
+## [3.2.1](https://github.com/rapidez/sentry/releases/tag/3.2.1) - 2025-11-11
+
+### Added
+
+- Backport V4 features (#20)
+
 ## [3.2.0](https://github.com/rapidez/sentry/releases/tag/3.2.0) - 2025-10-10
 
 ### Added
