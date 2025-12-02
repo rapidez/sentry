@@ -51,7 +51,7 @@ let collectIntegrations = (integrationsConfig) => {
         browserProfiling: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_BROWSER_PROFILING === 'true' ? browserProfilingIntegration : null,
         browserTracing: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_BROWSER_TRACING === 'true' ? browserTracingIntegration : null,
         captureConsole: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_CAPTURE_CONSOLE === 'true' ? captureConsoleIntegration : null,
-        cotextLines: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_CONTEXT_LINES === 'true' ? cotextLinesIntegration : null,
+        contextLines: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_CONTEXT_LINES === 'true' ? contextLinesIntegration : null,
         extraErrorData: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_EXTRA_ERROR_DATA === 'true' ? extraErrorDataIntegration : null,
         graphqlClient: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_GRAPHQL_CLIENT === 'true' ? graphqlClientIntegration : null,
         httpClient: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_HTTP_CLIENT === 'true' ? httpClientIntegration : null,
