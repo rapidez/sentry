@@ -47,21 +47,22 @@ let init = (app) => {
 
 let collectIntegrations = (integrationsConfig) => {
     // Collect all configured integrations
-    let integrations = []
-
-    // These ifs make tree shaking possible, they will get compiled away.
-    import.meta.env.VITE_SENTRY_VUE_INTEGRATION_BROWSER_PROFILING === 'true' ? integrations.push(browserProfilingIntegration()) : null
-    import.meta.env.VITE_SENTRY_VUE_INTEGRATION_BROWSER_TRACING === 'true' ? integrations.push(browserTracingIntegration(integrationsConfig.browserTracing === true ? undefined : integrationsConfig.browserTracing)) : null
-    import.meta.env.VITE_SENTRY_VUE_INTEGRATION_CAPTURE_CONSOLE === 'true' ? integrations.push(captureConsoleIntegration(integrationsConfig.captureConsole === true ? undefined : integrationsConfig.captureConsole)) : null
-    import.meta.env.VITE_SENTRY_VUE_INTEGRATION_CONTEXT_LINES === 'true' ? integrations.push(contextLinesIntegration(integrationsConfig.contextLines === true ? undefined : integrationsConfig.contextLines)) : null
-    import.meta.env.VITE_SENTRY_VUE_INTEGRATION_EXTRA_ERROR_DATA === 'true' ? integrations.push(extraErrorDataIntegration(integrationsConfig.extraErrorData === true ? undefined : integrationsConfig.extraErrorData)) : null
-    import.meta.env.VITE_SENTRY_VUE_INTEGRATION_GRAPHQL_CLIENT === 'true' ? integrations.push(graphqlClientIntegration(integrationsConfig.graphqlClient === true ? undefined : integrationsConfig.graphqlClient)) : null
-    import.meta.env.VITE_SENTRY_VUE_INTEGRATION_HTTP_CLIENT === 'true' ? integrations.push(httpClientIntegration(integrationsConfig.httpClient === true ? undefined : integrationsConfig.httpClient)) : null
-    import.meta.env.VITE_SENTRY_VUE_INTEGRATION_MODULE_METADATA === 'true' ? integrations.push(moduleMetadataIntegration()) : null
-    import.meta.env.VITE_SENTRY_VUE_INTEGRATION_REPLAY_CANVAS === 'true' ? integrations.push(replayCanvasIntegration()) : null
-    import.meta.env.VITE_SENTRY_VUE_INTEGRATION_REPLAY === 'true' ? integrations.push(replayIntegration()) : null
-    import.meta.env.VITE_SENTRY_VUE_INTEGRATION_REPORTING_OBSERVER === 'true' ? integrations.push(reportingObserverIntegration(integrationsConfig.reportingObserver === true ? undefined : integrationsConfig.reportingObserver)) : null
-    import.meta.env.VITE_SENTRY_VUE_INTEGRATION_REWRITE_FRAMES === 'true' ? integrations.push(rewriteFramesIntegration(integrationsConfig.rewriteFrames === true ? undefined : integrationsConfig.rewriteFrames)) : null
+    let integrations = Object.entries({
+        browserProfiling: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_BROWSER_PROFILING === 'true' ? browserProfilingIntegration : null,
+        browserTracing: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_BROWSER_TRACING === 'true' ? browserTracingIntegration : null,
+        captureConsole: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_CAPTURE_CONSOLE === 'true' ? captureConsoleIntegration : null,
+        cotextLines: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_CONTEXT_LINES === 'true' ? cotextLinesIntegration : null,
+        extraErrorData: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_EXTRA_ERROR_DATA === 'true' ? extraErrorDataIntegration : null,
+        graphqlClient: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_GRAPHQL_CLIENT === 'true' ? graphqlClientIntegration : null,
+        httpClient: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_HTTP_CLIENT === 'true' ? httpClientIntegration : null,
+        moduleMetadata: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_MODULE_METADATA === 'true' ? moduleMetadataIntegration : null,
+        replayCanvas: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_REPLAY_CANVAS === 'true' ? replayCanvasIntegration : null,
+        replay: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_REPLAY === 'true' ? replayIntegration : null,
+        reportingObserver: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_REPORTING_OBSERVER === 'true' ? reportingObserverIntegration : null,
+        rewriteFrames: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_REWRITE_FRAMES === 'true' ? rewriteFramesIntegration : null,
+    })
+        .filter(([configName, integration]) => integration && integrationsConfig[configName] !== false)
+        .map(([configName, integration]) => integration(integrationsConfig[configName] === true ? undefined : integrationsConfig[configName]))
 
     return integrations;
 }
