@@ -70,7 +70,7 @@ document.dispatchEvent(new Event('sentry-test-error'))
 This functionality can be disabled in your `.env`:
 
 ```
-SENTRY_VUE_ALLOW_TEST_ERRORS=false
+VITE_SENTRY_VUE_ALLOW_TEST_ERRORS=false
 ```
 
 ## Deprecating older browsers

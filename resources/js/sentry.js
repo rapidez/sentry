@@ -1,24 +1,27 @@
-import * as Sentry from '@sentry/vue'
+import {
+    init as initSentry,
+    setUser as sentrySetUser,
+    setTag,
+    browserProfilingIntegration,
+    browserTracingIntegration,
+    captureConsoleIntegration,
+    contextLinesIntegration,
+    extraErrorDataIntegration,
+    httpClientIntegration,
+    graphqlClientIntegration,
+    moduleMetadataIntegration,
+    rewriteFramesIntegration,
+    replayIntegration,
+    replayCanvasIntegration,
+    reportingObserverIntegration
+} from '@sentry/vue'
+
 import { runBeforeSendMethodHandlers } from './stores/useBeforeSendHandlers'
 import './filters.js'
 
 let initialized = false
 let init = (app) => {
     initialized = true;
-    // Collect all configured integrations
-    let integrations = Object.entries(window.config.sentry.integrations).map(([integration, value]) => {
-        if (!value) {
-            return
-        }
-
-        let integrationFunction = Sentry[integration + 'Integration']
-        if(!integrationFunction) {
-            return
-        }
-
-        return value === true ? integrationFunction() : integrationFunction(value)
-    }).filter((value) => value !== undefined)
-
     window.config.sentry.configuration.allowUrls.push(window.config.base_url)
     window.config.sentry.configuration.tracePropagationTargets.push(window.config.base_url)
     window.config.sentry.configuration.tracePropagationTargets.push(window.config.magento_url)
@@ -32,30 +35,52 @@ let init = (app) => {
             app,
             dsn: import.meta.env.VITE_SENTRY_DSN,
             environment: import.meta.env.MODE,
-            integrations: integrations,
+            integrations: collectIntegrations(window.config.sentry.integrations),
             beforeSend: runBeforeSendMethodHandlers,
         },
         window.config.sentry.configuration
     )
 
     // Initialize Sentry
-    Sentry.init(configuration)
+    initSentry(configuration)
+}
+
+let collectIntegrations = (integrationsConfig) => {
+    // Collect all configured integrations
+    let integrations = Object.entries({
+        browserProfiling: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_BROWSER_PROFILING === 'true' ? browserProfilingIntegration : null,
+        browserTracing: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_BROWSER_TRACING === 'true' ? browserTracingIntegration : null,
+        captureConsole: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_CAPTURE_CONSOLE === 'true' ? captureConsoleIntegration : null,
+        contextLines: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_CONTEXT_LINES === 'true' ? contextLinesIntegration : null,
+        extraErrorData: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_EXTRA_ERROR_DATA === 'true' ? extraErrorDataIntegration : null,
+        graphqlClient: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_GRAPHQL_CLIENT === 'true' ? graphqlClientIntegration : null,
+        httpClient: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_HTTP_CLIENT === 'true' ? httpClientIntegration : null,
+        moduleMetadata: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_MODULE_METADATA === 'true' ? moduleMetadataIntegration : null,
+        replayCanvas: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_REPLAY_CANVAS === 'true' ? replayCanvasIntegration : null,
+        replay: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_REPLAY === 'true' ? replayIntegration : null,
+        reportingObserver: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_REPORTING_OBSERVER === 'true' ? reportingObserverIntegration : null,
+        rewriteFrames: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_REWRITE_FRAMES === 'true' ? rewriteFramesIntegration : null,
+    })
+        .filter(([configName, integration]) => integration && integrationsConfig[configName] !== false)
+        .map(([configName, integration]) => integration(integrationsConfig[configName] === true ? undefined : integrationsConfig[configName]))
+
+    return integrations;
 }
 
 // Functionality to link a user to the Sentry messages
 let setUser = (user) => {
     if(user.is_logged_in) {
-        Sentry.setUser({
+        sentrySetUser({
             id: user.id,
             username: [user.firstname, user.lastname].filter(Boolean).join(' '),
             email: user.email,
         })
     } else {
-        Sentry.setUser(null)
+        sentrySetUser(null)
     }
 
     // Add an extra 'logged_in' tag to errors
-    Sentry.setTag('logged_in', user.is_logged_in)
+    setTag('logged_in', user.is_logged_in)
 }
 
 if (window.app) {
@@ -66,12 +91,13 @@ document.addEventListener('vue:loaded', async (event) => {
     if (!initialized) {
         init(event.details.vue);
     }
-    window.$on(['logged-in', 'logged-out'], () => setUser(window.app.config.globalProperties.user.value))
+    window.$on('logged-in', () => setUser(window.app.config.globalProperties.user.value))
+    window.$on('logged-out', () => setUser(window.app.config.globalProperties.user.value))
     setUser(window.app.config.globalProperties.user.value)
 })
 
-// Allow test errors to be sent from the browser console with `document.dispatchEvent(new Event('sentry-test-error'))`
-if(window.config.sentry.configuration.allow_test_errors) {
+if(import.meta.env.VITE_SENTRY_VUE_ALLOW_TEST_ERRORS !== 'false') {
+    // Allow test errors to be sent from the browser console with `document.dispatchEvent(new Event('sentry-test-error'))`
     document.addEventListener('sentry-test-error', () => {
         throw new Error('Sentry test error')
     })
