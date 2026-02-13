@@ -1,6 +1,12 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/4.1.2...4.1.2)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/4.2.0...4.2.0)
+## [4.2.0](https://github.com/rapidez/sentry/releases/tag/4.2.0) - 2026-02-13
+
+### Added
+
+- Add environment configuration to Sentry Vue (#24)
+
 ## [4.1.2](https://github.com/rapidez/sentry/releases/tag/4.1.2) - 2025-11-11
 
 ### Fixed
