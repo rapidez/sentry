@@ -1,6 +1,22 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/4.1.1...4.1.1)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/5.0.0...5.0.0)
+## [5.0.0](https://github.com/rapidez/sentry/releases/tag/5.0.0) - 2026-02-13
+
+### Added
+
+- Add environment configuration to Sentry Vue (#23)
+
+### Changed
+
+- Vue 3 upgrade (#16)
+
+### Fixed
+
+- Load urls from global config instead of vue config (#18)
+- Catch invalid url filenames (#21)
+- Improved tree shaking (#26)
+
 ## [4.1.1](https://github.com/rapidez/sentry/releases/tag/4.1.1) - 2025-10-10
 
 ### Fixed
