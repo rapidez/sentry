@@ -9,10 +9,10 @@ export function sanitizeNetworkEvent(event) {
         if (!headerToSanitize) {
             continue;
         }
-        if (event.data.payload.data.request.headers[headerToSanitize]) {
+        if (event.data.payload.data.request?.headers?.[headerToSanitize]) {
             event.data.payload.data.request.headers[headerToSanitize] = '[Filtered]'
         }
-        if (event.data.payload.data.response.headers[headerToSanitize]) {
+        if (event.data.payload.data.response?.headers?.[headerToSanitize]) {
             event.data.payload.data.response.headers[headerToSanitize] = '[Filtered]'
         }
     }
@@ -49,7 +49,6 @@ export function sanitizeNetworkEvent(event) {
                 continue;
             }
             const re = new RegExp(`("?${jsonValueToSanitize}"?: ?")([^"]+)(")`, 'g')
-            requestAndResponse.request.body = requestAndResponse.request.body?.replaceAll(re, '$1[Filtered]$3')
             body = body?.replaceAll(re, '$1[Filtered]$3')
         }
 
@@ -60,8 +59,12 @@ export function sanitizeNetworkEvent(event) {
         return body
     }
 
-    event.data.payload.data.request.body = performSanitization(event.data.payload.data.request.body)
-    event.data.payload.data.response.body = performSanitization(event.data.payload.data.response.body)
+    if (event?.data?.payload?.data?.request?.body) {
+        event.data.payload.data.request.body = performSanitization(event.data.payload.data.request.body)
+    }
+    if (event?.data?.payload?.data?.response?.body) {
+        event.data.payload.data.response.body = performSanitization(event.data.payload.data.response.body)
+    }
 
     return event;
 }
