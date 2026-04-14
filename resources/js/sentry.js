@@ -1,6 +1,7 @@
 import * as Sentry from '@sentry/vue'
 import { runBeforeSendMethodHandlers } from './stores/useBeforeSendHandlers'
 import './filters.js'
+import { sanitizeNetworkEvent } from './sanitization.js'
 
 // Collect all configured integrations
 let integrations = Object.entries(window.config.sentry.integrations).map(([integration, value]) => {
@@ -11,6 +12,22 @@ let integrations = Object.entries(window.config.sentry.integrations).map(([integ
     let integrationFunction = Sentry[integration + 'Integration']
     if(!integrationFunction) {
         return
+    }
+
+    if ((value === true || typeof value === 'object') && integration === 'replay') {
+        if (value === true) {
+            value = {};
+        }
+        value.beforeAddRecordingEvent = (event) => {
+            if (
+                event?.data?.payload?.data?.request?.body &&
+                event?.data?.payload?.data?.response?.body
+            ) {
+                return sanitizeNetworkEvent(event);
+            }
+
+            return event
+        }
     }
 
     return value === true ? integrationFunction() : integrationFunction(value)
