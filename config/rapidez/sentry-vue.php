@@ -21,6 +21,7 @@ return [
 
         // Only report errors for matching urls, by default the shop url will be used
         'allowUrls' => explode(' ', env('SENTRY_VUE_ALLOW_URLS', '') ),
+        'sendDefaultPii' => (bool) env('SENTRY_SEND_DEFAULT_PII', false),
 
         // See the Sentry documentation: https://docs.sentry.io/platforms/javascript/guides/vue/configuration/filtering/#using-ignore-errors
         'ignoreErrors' => [

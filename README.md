@@ -123,6 +123,36 @@ Then in Magento make sure to enable "Tracing", "Performance tracking", and to se
 
 With this set up your Rapidez and Magento Sentry should be linked with each other.
 
+## Record network details
+
+By default Sentry blocks all text, inputs, images and request/response bodies: https://docs.sentry.io/platforms/javascript/session-replay/privacy/#privacy-configuration
+
+If you want to change this behaviour, you can override these in `config/sentry-vue.php`
+```php
+...
+    'integrations' => [
+        ...
+        'replay' => [
+            'maskAllText' => false,
+            'blockAllMedia' => false,
+            'networkDetailAllowUrls' => [
+                'https://example.com',
+                'https://magento.example.com',
+            ],
+        ],
+        ...
+    ],
+    ...
+```
+
+By setting "networkDetailAllowUrls" the request bodies and responses will be reported as well. This means some personal information could be sent over. We have a sanitizer in place to reduce the impact.
+You can extend the values filtered out with the following .env variables
+```env
+SENTRY_SEND_DEFAULT_PII="true"
+VITE_SENTRY_SANITIZE_HEADERS="Cookie Set-Cookie"
+VITE_SENTRY_SANITIZE_JSON_VALUES="password iban"
+```
+
 ## License
 
 GNU General Public License v3. Please see [License File](LICENSE) for more information.
