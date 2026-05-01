@@ -89,9 +89,11 @@ If *any* of them end up being nullish, Sentry will not be loaded and frontend er
 
 ## Filtering errors
 
+### Vue
+
 You can use the standard Sentry configuration for `ignoreErrors` as described in the [sentry documentation](https://docs.sentry.io/platforms/javascript/guides/vue/configuration/filtering/#using-ignore-errors).
 
-This can be done in the configuration file like so:
+This can be done in the `config/rapidez/sentry-vue.php` configuration file like so:
 
 ```php
 'ignoreErrors' => [
@@ -99,6 +101,38 @@ This can be done in the configuration file like so:
     '_isDestroyed',
 ],
 ```
+
+### Laravel
+
+If you want to implement error filtering from Laravel, you will have to enable the `before_send` handler in your `config/sentry.php`:
+
+```php
+'before_send' => [\Rapidez\Sentry\Filters\SentryFilter::class, 'beforeSend'],
+```
+
+You can then configure your `config/rapidez/sentry.php` as follows:
+```php
+// List of errors to ignore
+'ignoreErrors' => [
+    ['message' => 'Unnecessary error'],
+    ['exception' => \App\UnnecessaryError::class],
+],
+```
+
+You can ignore either messages that contain certain strings, or whole Exception classes. 
+
+### Global filtering
+
+You can also use an external JSON file to filter errors globally. This has the same format as the list of ignoreErrors for Laravel (but then in json). For example:
+
+```json
+{
+    {"message": "Unnecessary error"},
+    {"exception": "\\App\\UnnecessaryError"},
+},
+```
+
+The messages will currently be used for both Laravel and Vue filtering.
 
 ## Linking frontend errors to Magento Errors (Distributed Tracing)
 
