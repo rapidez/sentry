@@ -18,6 +18,7 @@ import {
 
 import { runBeforeSendMethodHandlers } from './stores/useBeforeSendHandlers'
 import './filters.js'
+import { sanitizeNetworkEvent } from './sanitization.js'
 
 let initialized = false
 let init = (app) => {
@@ -46,6 +47,19 @@ let init = (app) => {
 }
 
 let collectIntegrations = (integrationsConfig) => {
+    integrationsConfig.replay = {
+        beforeAddRecordingEvent: (event) => {
+            if (
+                event?.data?.payload?.data?.request?.body &&
+                event?.data?.payload?.data?.response?.body
+            ) {
+                return sanitizeNetworkEvent(event);
+            }
+
+            return event;
+        },
+        ...(integrationsConfig.replay || {}),
+    }
     // Collect all configured integrations
     let integrations = Object.entries({
         browserProfiling: import.meta.env.VITE_SENTRY_VUE_INTEGRATION_BROWSER_PROFILING === 'true' ? browserProfilingIntegration : null,
@@ -93,6 +107,7 @@ document.addEventListener('vue:loaded', async (event) => {
     }
     window.$on('logged-in', () => setUser(window.app.config.globalProperties.user.value))
     window.$on('logged-out', () => setUser(window.app.config.globalProperties.user.value))
+    window.$on('checkout-success', (order) => setTag('order_increment_id', order?.number))
     setUser(window.app.config.globalProperties.user.value)
 })
 
