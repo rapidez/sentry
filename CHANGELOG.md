@@ -1,6 +1,12 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/4.2.0...4.2.0)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/4.3.0...4.3.0)
+## [4.3.0](https://github.com/rapidez/sentry/releases/tag/4.3.0) - 2026-05-01
+
+### Added
+
+- Added network event sanitizers so replay fetch bodies can be enabled (#29)
+
 ## [4.2.0](https://github.com/rapidez/sentry/releases/tag/4.2.0) - 2026-02-13
 
 ### Added
