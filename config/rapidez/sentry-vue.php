@@ -57,7 +57,15 @@ return [
         'httpClient' => env('VITE_SENTRY_VUE_INTEGRATION_HTTP_CLIENT', false),
         'moduleMetadata' => env('VITE_SENTRY_VUE_INTEGRATION_MODULE_METADATA', false),
         'replayCanvas' => env('VITE_SENTRY_VUE_INTEGRATION_REPLAY_CANVAS', false),
-        'replay' => env('VITE_SENTRY_VUE_INTEGRATION_REPLAY', false),
+        'replay' => env('SENTRY_VUE_INTEGRATION_REPLAY', false) ? [
+            'maskAllText' => env('SENTRY_VUE_INTEGRATION_REPLAY_MASK_ALL_TEXT', false),
+            'blockAllMedia' => env('SENTRY_VUE_INTEGRATION_REPLAY_BLOCK_ALL_MEDIA', false),
+            'networkDetailAllowUrls' => env('SENTRY_VUE_INTEGRATION_REPLAY_NETWORK_BODY', false) ? [
+                env('APP_URL'),
+                env('MAGENTO_BASE_URL'),
+                ...explode(' ', (string) env('SENTRY_VUE_ALLOW_URLS', '')),
+            ] : [],
+        ] : false,
         'reportingObserver' => env('VITE_SENTRY_VUE_INTEGRATION_REPORTING_OBSERVER', false),
         'rewriteFrames' => env('VITE_SENTRY_VUE_INTEGRATION_REWRITE_FRAMES', false),
     ],
