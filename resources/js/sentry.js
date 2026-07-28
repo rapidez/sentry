@@ -97,13 +97,13 @@ let setUser = (user) => {
     setTag('logged_in', user.is_logged_in)
 }
 
-if (window.app) {
+if (window.app?.config ?? null) {
     init(window.app);
 }
 
 document.addEventListener('vue:loaded', async (event) => {
     if (!initialized) {
-        init(event.details.vue);
+        init(event.detail.vue);
     }
     window.$on('logged-in', () => setUser(window.app.config.globalProperties.user.value))
     window.$on('logged-out', () => setUser(window.app.config.globalProperties.user.value))
