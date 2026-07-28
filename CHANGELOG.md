@@ -1,6 +1,12 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/5.1.0...5.1.0)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/5.1.1...5.1.1)
+## [5.1.1](https://github.com/rapidez/sentry/releases/tag/5.1.1) - 2026-07-28
+
+### Fixed
+
+- Fix Sentry loading in too early (#31)
+
 ## [5.1.0](https://github.com/rapidez/sentry/releases/tag/5.1.0) - 2026-05-01
 
 ### Added
