@@ -144,6 +144,12 @@ If you want to change this behaviour, you can override these in `config/sentry-v
     ],
     ...
 ```
+Alternatively the following ENV variables can be used:
+```env
+VITE_SENTRY_VUE_INTEGRATION_REPLAY_MASK_ALL_TEXT=false
+VITE_SENTRY_VUE_INTEGRATION_REPLAY_BLOCK_ALL_MEDIA=false
+VITE_SENTRY_VUE_INTEGRATION_REPLAY_NETWORK_BODY=false
+```
 
 By setting "networkDetailAllowUrls" the request bodies and responses will be reported as well. This means some personal information could be sent over. We have a sanitizer in place to reduce the impact.
 You can extend the values filtered out with the following .env variables
