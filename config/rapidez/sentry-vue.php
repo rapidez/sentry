@@ -57,10 +57,10 @@ return [
         'httpClient' => env('VITE_SENTRY_VUE_INTEGRATION_HTTP_CLIENT', false),
         'moduleMetadata' => env('VITE_SENTRY_VUE_INTEGRATION_MODULE_METADATA', false),
         'replayCanvas' => env('VITE_SENTRY_VUE_INTEGRATION_REPLAY_CANVAS', false),
-        'replay' => env('SENTRY_VUE_INTEGRATION_REPLAY', false) ? [
-            'maskAllText' => env('SENTRY_VUE_INTEGRATION_REPLAY_MASK_ALL_TEXT', false),
-            'blockAllMedia' => env('SENTRY_VUE_INTEGRATION_REPLAY_BLOCK_ALL_MEDIA', false),
-            'networkDetailAllowUrls' => env('SENTRY_VUE_INTEGRATION_REPLAY_NETWORK_BODY', false) ? [
+        'replay' => env('VITE_SENTRY_VUE_INTEGRATION_REPLAY', false) ? [
+            'maskAllText' => env('VITE_SENTRY_VUE_INTEGRATION_REPLAY_MASK_ALL_TEXT', false),
+            'blockAllMedia' => env('VITE_SENTRY_VUE_INTEGRATION_REPLAY_BLOCK_ALL_MEDIA', false),
+            'networkDetailAllowUrls' => env('VITE_SENTRY_VUE_INTEGRATION_REPLAY_NETWORK_BODY', false) ? [
                 env('APP_URL'),
                 env('MAGENTO_BASE_URL'),
                 ...explode(' ', (string) env('SENTRY_VUE_ALLOW_URLS', '')),
