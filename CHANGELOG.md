@@ -1,6 +1,12 @@
 # Changelog 
 
-[Unreleased changes](https://github.com/rapidez/sentry/compare/5.1.1...5.1.1)
+[Unreleased changes](https://github.com/rapidez/sentry/compare/5.2.0...5.2.0)
+## [5.2.0](https://github.com/rapidez/sentry/releases/tag/5.2.0) - 2026-08-11
+
+### Added
+
+- Extended default replay config (#30)
+
 ## [5.1.1](https://github.com/rapidez/sentry/releases/tag/5.1.1) - 2026-07-28
 
 ### Fixed
