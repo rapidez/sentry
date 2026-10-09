@@ -4,7 +4,7 @@ This package integrates Sentry Laravel and Sentry Vue into a Rapidez project.
 ## Installation
 
 ```
-yarn add @sentry/vue --dev
+pnpm add -D @sentry/vue
 composer require rapidez/sentry
 ```
 
